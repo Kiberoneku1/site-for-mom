@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>С 8 марта! Сияй ✨</title>
+	<style>
+		/* ===== СБРОС И БАЗОВЫЕ ПЕРЕМЕННЫЕ ===== */
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			cursor: none;
+			/* скрываем стандартный курсор */
+		}
+
+		body {
+			background: #0d0b1a;
+			/* глубокий фиолетово-черный фон */
+			font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow-x: hidden;
+			color: white;
+		}
+
+		/* ===== КАСТОМНЫЙ КУРСОР ===== */
+		.cursor {
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			background: radial-gradient(circle at 30% 30%, #fff8, #ff99cc);
+			position: fixed;
+			pointer-events: none;
+			mix-blend-mode: exclusion;
+			/* интересный эффект наложения */
+			z-index: 9999;
+			transition: transform 0.1s ease;
+			box-shadow: 0 0 20px #ffaad4, 0 0 40px #ff69b4;
+			animation: hueRotate 3s infinite linear;
+		}
+
+		@keyframes hueRotate {
+			0% {
+				filter: hue-rotate(0deg);
+			}
+
+			100% {
+				filter: hue-rotate(360deg);
+			}
+		}
+
+		/* ===== ОСНОВНОЙ КОНТЕЙНЕР С ПАРАЛЛАКСОМ ===== */
+		.parallax-wrapper {
+			perspective: 100px;
+			height: 100%;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 2rem;
+		}
+
+		.card {
+			max-width: 700px;
+			width: 100%;
+			background: rgba(255, 255, 255, 0.08);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid rgba(255, 180, 210, 0.3);
+			border-radius: 48px;
+			padding: 3rem 2.5rem;
+			box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 200, 230, 0.15) inset;
+			transform-style: preserve-3d;
+			transform: rotateX(2deg) rotateY(2deg);
+			transition: transform 0.2s ease;
+			animation: float 6s infinite alternate ease-in-out;
+		}
+
+		@keyframes float {
+			0% {
+				transform: translateY(0) rotateX(2deg) rotateY(2deg);
+			}
+
+			100% {
+				transform: translateY(-15px) rotateX(1deg) rotateY(3deg);
+			}
+		}
+
+		/* эффекты наведения (параллакс-слои) */
+		.card__layer {
+			transition: transform 0.15s ease-out;
+			will-change: transform;
+		}
+
+		/* ===== ТИПОГРАФИКА И ДЕКОР ===== */
+		h1 {
+			font-size: 4rem;
+			font-weight: 700;
+			background: linear-gradient(145deg, #ffddee, #ffb6d9, #c3a5ff);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			margin-bottom: 0.5rem;
+			text-shadow: 0 0 30px #ff9acb, 2px 2px 10px #00000050;
+			letter-spacing: 2px;
+		}
+
+		.subtitle {
+			font-size: 1.8rem;
+			font-weight: 300;
+			color: #ffe5f0;
+			margin-bottom: 1rem;
+			border-left: 5px solid #ff88b0;
+			padding-left: 1.5rem;
+			text-shadow: 0 2px 5px #000;
+		}
+
+		.message {
+			font-size: 1.3rem;
+			line-height: 1.6;
+			margin: 2rem 0;
+			background: rgba(255, 240, 250, 0.05);
+			padding: 1.8rem;
+			border-radius: 32px;
+			backdrop-filter: blur(4px);
+			border: 1px dashed #ffb0d0;
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+		}
+
+		.flower-grid {
+			display: flex;
+			gap: 1rem;
+			justify-content: center;
+			margin: 2rem 0 1.5rem;
+		}
+
+		.flower {
+			font-size: 3rem;
+			filter: drop-shadow(0 0 15px #f7b0d0);
+			animation: petalPop 2s infinite alternate;
+			transition: transform 0.2s;
+		}
+
+		.flower:nth-child(2) {
+			animation-delay: 0.2s;
+		}
+
+		.flower:nth-child(3) {
+			animation-delay: 0.4s;
+		}
+
+		.flower:nth-child(4) {
+			animation-delay: 0.6s;
+		}
+
+		.flower:nth-child(5) {
+			animation-delay: 0.8s;
+		}
+
+		@keyframes petalPop {
+			0% {
+				transform: scale(1) rotate(0deg);
+			}
+
+			100% {
+				transform: scale(1.2) rotate(5deg);
+			}
+		}
+
+		/* КНОПКА-СЮРПРИЗ */
+		.surprise-btn {
+			background: linear-gradient(45deg, #ff99cc, #c08aff);
+			border: none;
+			color: #140d1f;
+			font-weight: bold;
+			font-size: 1.6rem;
+			padding: 1.2rem 2.5rem;
+			border-radius: 50px;
+			cursor: none;
+			box-shadow: 0 10px 30px #d9267c80, 0 0 30px #f062b0;
+			transition: 0.2s;
+			margin: 1.5rem 0 0.5rem;
+			border: 2px solid #ffc1e0;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+		}
+
+		.surprise-btn:hover {
+			transform: scale(1.08);
+			box-shadow: 0 0 50px #ffaeef, 0 10px 30px #ff50a0;
+		}
+
+		/* скрытое поздравление-сюрприз */
+		.hidden-gift {
+			margin-top: 2rem;
+			font-size: 2rem;
+			background: rgba(255, 200, 230, 0.2);
+			border-radius: 60px;
+			padding: 1rem;
+			opacity: 0;
+			transform: scale(0.8);
+			transition: opacity 0.5s, transform 0.5s;
+			pointer-events: none;
+			border: 2px solid white;
+			backdrop-filter: blur(15px);
+		}
+
+		.hidden-gift.show {
+			opacity: 1;
+			transform: scale(1);
+			pointer-events: auto;
+		}
+
+		.gift-content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		.gift-content p {
+			font-size: 2rem;
+			background: linear-gradient(45deg, gold, pink, white);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		.confetti-piece {
+			position: fixed;
+			width: 10px;
+			height: 20px;
+			background: #f0f;
+			top: -10vh;
+			pointer-events: none;
+			z-index: 9998;
+			opacity: 0.8;
+			animation: fall 4s linear forwards;
+		}
+
+		@keyframes fall {
+			to {
+				transform: translateY(110vh) rotate(720deg);
+				opacity: 0;
+			}
+		}
+
+		/* дополнительный параллакс-слой (цветы на заднем фоне) */
+		.parallax-bg {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+			z-index: -1;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10vw;
+			padding: 5vw;
+			opacity: 0.3;
+			font-size: 5rem;
+			transform: translateZ(-10px) scale(2);
+		}
+
+		.parallax-bg span {
+			animation: bgFloat 12s infinite alternate;
+		}
+
+		@keyframes bgFloat {
+			0% {
+				transform: translate(0, 0) rotate(0deg);
+			}
+
+			100% {
+				transform: translate(20px, -20px) rotate(10deg);
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- переливающийся курсор-кружок -->
+	<div class="cursor" id="cursor"></div>
+
+	<!-- параллакс фон (дальний слой) -->
+	<div class="parallax-bg">
+		<span>🌸</span> <span>🌷</span> <span>🌺</span> <span>🌹</span> <span>🌼</span> <span>💐</span>
+		<span>🌸</span> <span>🌷</span> <span>🌺</span> <span>🌹</span> <span>🌼</span> <span>💐</span>
+	</div>
+
+	<!-- основной контент с параллакс-эффектом наведения -->
+	<div class="parallax-wrapper" id="parallaxWrapper">
+		<div class="card" id="card">
+			<div class="card__layer" data-depth="0.4">
+				<h1>С 8 марта</h1>
+			</div>
+			<div class="card__layer" data-depth="0.6">
+				<div class="subtitle">прекрасная, нежная, сияющая</div>
+			</div>
+			<div class="card__layer" data-depth="0.2">
+				<div class="flower-grid">
+					<span class="flower">🌷</span>
+					<span class="flower">🌹</span>
+					<span class="flower">🌸</span>
+					<span class="flower">🌼</span>
+					<span class="flower">💮</span>
+				</div>
+			</div>
+			<div class="card__layer" data-depth="0.8">
+				<div class="message">
+					Пусть каждый день будет полон улыбок,<br>
+					весеннего тепла и вдохновения. <br>
+					Сияй ярко, как эти переливы! ✨
+				</div>
+			</div>
+			<div class="card__layer" data-depth="0.5">
+				<button class="surprise-btn" id="surpriseBtn">🎁 СЮРПРИЗ</button>
+			</div>
+
+			<!-- скрытый блок, который появится по клику -->
+			<div class="card__layer hidden-gift" id="giftBlock">
+				<div class="gift-content">
+					<span>🎉 🥳 🎉</span>
+					<p>Ты — самое чудесное, что есть на свете!</p>
+					<span style="font-size: 3rem;">🌸💖🌺</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		(function () {
+			// 1. Кастомный курсор (переливающийся)
+			const cursor = document.getElementById('cursor');
+
+			document.addEventListener('mousemove', (e) => {
+				cursor.style.left = e.clientX - 16 + 'px';   // центрируем (32/2)
+				cursor.style.top = e.clientY - 16 + 'px';
+			});
+
+			// прячем курсор при уходе с окна
+			document.addEventListener('mouseleave', () => {
+				cursor.style.opacity = '0';
+			});
+			document.addEventListener('mouseenter', () => {
+				cursor.style.opacity = '1';
+			});
+
+			// 2. Параллакс наведение на карточку (эффект 3D по осям)
+			const card = document.getElementById('card');
+			const wrapper = document.getElementById('parallaxWrapper');
+			const layers = document.querySelectorAll('.card__layer');
+
+			function applyParallax(e) {
+				const wrapperRect = wrapper.getBoundingClientRect();
+				// центр вращения — центр карточки
+				const centerX = wrapperRect.left + wrapperRect.width / 2;
+				const centerY = wrapperRect.top + wrapperRect.height / 2;
+
+				// максимальное смещение угла: 6 градусов
+				const maxRotate = 6;
+				// вычисляем положение мыши относительно центра (от -1 до 1)
+				const mouseX = (e.clientX - centerX) / (wrapperRect.width / 2);
+				const mouseY = (e.clientY - centerY) / (wrapperRect.height / 2);
+
+				// ограничиваем, чтобы значения были в [-1, 1]
+				const rotY = Math.min(maxRotate, Math.max(-maxRotate, mouseX * maxRotate));
+				const rotX = Math.min(maxRotate, Math.max(-maxRotate, -mouseY * maxRotate)); // инверсия для естественности
+
+				// применяем вращение к карточке (основной объем)
+				card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(10px)`;
+
+				// дополнительно двигаем слои с разной скоростью (data-depth)
+				layers.forEach(layer => {
+					const depth = parseFloat(layer.dataset.depth) || 0.4;
+					// сдвиг в противоположную сторону от движения мыши, с коэффициентом depth
+					const moveX = (mouseX * 20 * depth); // до 20px
+					const moveY = (mouseY * 20 * depth);
+					layer.style.transform = `translateX(${-moveX}px) translateY(${-moveY}px)`;
+				});
+			}
+
+			// сбрасываем при уходе мыши с враппера
+			function resetParallax() {
+				card.style.transform = `rotateX(2deg) rotateY(2deg) translateZ(10px)`;
+				layers.forEach(layer => {
+					layer.style.transform = `translateX(0) translateY(0)`;
+				});
+			}
+
+			wrapper.addEventListener('mousemove', applyParallax);
+			wrapper.addEventListener('mouseleave', resetParallax);
+
+			// 3. Сюрприз по кнопке (конфетти + появление блока с подарком)
+			const surpriseBtn = document.getElementById('surpriseBtn');
+			const giftBlock = document.getElementById('giftBlock');
+
+			// функция конфетти (простая, из кусочков)
+			function launchConfetti() {
+				for (let i = 0; i < 60; i++) {
+					const confetti = document.createElement('div');
+					confetti.classList.add('confetti-piece');
+					// случайные цвета
+					const colors = ['#ffb3c6', '#ff69b4', '#c04cfd', '#ffe5b4', '#a0e7ff', '#d0f0c0', '#fae6b1'];
+					confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+					confetti.style.left = Math.random() * 100 + '%';
+					confetti.style.width = Math.random() * 16 + 6 + 'px';
+					confetti.style.height = Math.random() * 20 + 10 + 'px';
+					confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+					confetti.style.animationDelay = Math.random() * 1 + 's';
+					document.body.appendChild(confetti);
+
+					// удаляем после анимации
+					setTimeout(() => {
+						if (confetti.remove) confetti.remove();
+					}, 6000);
+				}
+			}
+
+			surpriseBtn.addEventListener('click', () => {
+				// показываем скрытый подарок
+				giftBlock.classList.add('show');
+				// запускаем фейерверк
+				launchConfetti();
+
+				// дополнительно меняем текст кнопки
+				surpriseBtn.textContent = '🌷 С ПРАЗДНИКОМ 🌷';
+				surpriseBtn.style.background = 'linear-gradient(45deg, #fad0c4, #ff9a9e)';
+
+				// через 5 секунд убираем подарок (по желанию, можно оставить)
+				// но оставим, чтобы не пропадал — но если повторно нажать, конфетти будет снова.
+			});
+
+			// 4. Небольшая дополнительная анимация для цветов при загрузке (уже в css)
+			// 5. Убираем мигание стандартного курсора, но добавим эффект исчезновения на кнопке
+			// кнопка тоже использует cursor: none
+		})();
+	</script>
+
+	<!-- небольшой фикс для touch устройств (чтобы не ломал курсор) -->
+	<style>
+		@media (pointer: coarse) {
+			.cursor {
+				display: none;
+			}
+
+			* {
+				cursor: auto;
+			}
+
+			body {
+				cursor: auto;
+			}
+		}
+	</style>
+
+	<!-- дополнительный эффект: при нажатии на кнопку мыши увеличиваем курсор -->
+	<script>
+		(function secondaryEffects() {
+			const cursor = document.getElementById('cursor');
+			document.addEventListener('mousedown', () => {
+				cursor.style.transform = 'scale(1.4)';
+			});
+			document.addEventListener('mouseup', () => {
+				cursor.style.transform = 'scale(1)';
+			});
+
+			// меняем свечение в зависимости от фона (но хватит и hueRotate)
+		})();
+	</script>
+</body>
+
+</html>
